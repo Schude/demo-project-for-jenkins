@@ -4,6 +4,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -13,6 +14,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 
 public class Driver {
@@ -27,8 +30,20 @@ public class Driver {
     if (driver == null) {
 
       if (System.getProperty("os.name").toLowerCase().contains("linux")) {
-        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+//        browser = "/home/opc/Downloads/chromedriver.exe";
+        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver.exe");
         return new ChromeDriver();
+
+//        ChromeDriverService service = new ChromeDriverService.Builder()
+//                .usingDriverExecutable(new File("/usr/local/bin/chromedriver.exe"))
+//                .usingAnyFreePort()
+//                .build();
+//        try {
+//          service.start();
+//        } catch (IOException e) {
+//          e.printStackTrace();
+//        }
+//        return new RemoteWebDriver(service.getUrl(), DesiredCapabilities.chrome());
 
       } else {
         if (System.getProperty("BROWSER") == null) {
