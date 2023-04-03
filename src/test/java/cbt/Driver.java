@@ -25,10 +25,11 @@ public class Driver {
 
   public static WebDriver getDriver () {
     if (driver == null) {
-//            if OS is linux, set the browser to chrome
 
       if (System.getProperty("os.name").toLowerCase().contains("linux")) {
-        browser = "/home/opc/Downloads/chromedriver";
+        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+        return new ChromeDriver();
+
       } else {
         if (System.getProperty("BROWSER") == null) {
           browser = ConfigurationReader.getProperty("browser");
